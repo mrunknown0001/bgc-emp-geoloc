@@ -38,9 +38,7 @@
 		      <table id="punches" class="table cell-border compact stripe hover display nowrap" width="99%">
 			      <thead>
 		          <tr>
-		            <th scope="col">Type</th>
 		            <th scope="col">Date & Time</th>
-		            <th scope="col">UUID</th>
 		            <th scope="col">IP</th>
 		            <th scope="col">Action</th>
 		          </tr>
@@ -64,13 +62,11 @@
 		        serverSide: true,
 		        scrollX: true,
 		        columnDefs: [
-		          { className: "dt-center", targets: [ 0, 1, 2, 3, 4 ] }
+		          { className: "dt-center", targets: [ 0, 1, 2 ] }
 		        ],
 		        ajax: "{{ route('user.show.emp.log', $emp->id) }}",
 		        columns: [
-	            {data: 'type', name: 'type'},
 	            {data: 'date_time', name: 'date_time'},
-	            {data: 'uuid', name: 'uuid'},
 	            {data: 'ip', name: 'ip'},
 	            {data: 'action', name: 'action', orderable: false, searchable: false},
 		        ]

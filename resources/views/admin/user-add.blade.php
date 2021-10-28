@@ -59,15 +59,6 @@
 						</select>
 					</div>
 					<div class="form-group">
-						<label for="manager">Manager</label>
-						<select class="form-control" id="manager" name="manager" disabled="true" required="false">
-							<option value="" selected>Select Manager</option>
-							@foreach($managers as $key => $m)
-							<option value="{{ $m->id }}">{{ $m->first_name . ' ' . $m->last_name }}</option>
-							@endforeach
-						</select>
-					</div>
-					<div class="form-group">
 						<label for="password">Password</label>
 						<input type="text" placeholder="Password" class="form-control" name="password" id="password" required>
 					</div>
@@ -83,18 +74,4 @@
 
 @section('script')
 
-	<script>
-		$('#role').change(function () {
-			if($('#role').val() == 4) {
-				$("#manager").attr("disabled", false);
-				$("#manager").attr("required", true);
-			}
-			else {
-				$("#manager").attr("disabled", true);
-				$("#manager").attr("required", false);
-				$('#manager').val('')
-			}
-		});
-
-	</script>
 @endsection

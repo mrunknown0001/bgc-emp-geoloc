@@ -3,16 +3,16 @@
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/test', 'TestController@test');
+// Route::get('/test', 'TestController@test');
 
-Route::get('/qr', 'GeneralController@qr');
+// Route::get('/qr', 'GeneralController@qr');
 
 Route::get('/', function () {
     return view('login');
 });
 
 
-Route::get('/email', 'MailController@sendMail');
+// Route::get('/email', 'MailController@sendMail');
 
 # Login for User
 Route::get('/login', 'LoginController@login')->name('login');
@@ -47,10 +47,6 @@ Route::group(['prefix' => 'a', 'middleware' => 'admin'], function () {
 	# Update user
 	Route::get('/user/update/{id}', 'AdminController@updateUser')->name('admin.update.user');
 	Route::post('/user/update/{id}', 'AdminController@postUpdateUser')->name('admin.post.update.user');
-
-	# Schedule Setting
-	Route::get('/schedule', 'ScheduleController@schedule')->name('schedule');
-	Route::post('/schedule', 'ScheduleController@updateSchedule')->name('update.schedule');
 
 	# Punches
 	Route::get('/punches', 'AdminController@punches')->name('admin.punches');
@@ -91,10 +87,7 @@ Route::group(['prefix' => 'e', 'middleware' => 'employee'], function () {
 	# User Dashboard
 	Route::get('/dashboard', 'EmployeeController@dashboard')->name('emp.dashboard');
 	# Log User Location and Time
-	Route::get('/geoloc/punch/{lat}/{lon}/{uuid}/{du}', 'EmployeeController@punch')->name('emp.punch');
+	Route::get('/geoloc/punch/{lat}/{lon}', 'EmployeeController@punch')->name('emp.punch');
 	# My PUnches
 	Route::get('/punches', 'EmployeeController@punches')->name('emp.punches');
-	# AJAX Data
-	Route::get('/in-today', 'EmployeeController@inToday')->name('emp.in.today');
-	Route::get('/out-today', 'EmployeeController@outToday')->name('emp.out.today');
 });

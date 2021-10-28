@@ -114,7 +114,6 @@ class AdminController extends Controller
         $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->role_id = $request->role;
-        $user->manager_id = $request->manager;
         $user->password = bcrypt($request->password);
         $user->save();
 
@@ -126,8 +125,7 @@ class AdminController extends Controller
     public function updateUser($id)
     {
         $user = User::findorfail($id);
-        $managers = User::where('role_id', 3)->get();
-        return view('admin.user-update', compact('managers', 'user'));
+        return view('admin.user-update', compact('user'));
     }
 
 
@@ -145,7 +143,6 @@ class AdminController extends Controller
         $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->role_id = $request->role;
-        $user->manager_id = $request->manager;
         if($request->password != null || $request->password != '') {
             $user->password = bcrypt($request->password);
         }
@@ -166,9 +163,7 @@ class AdminController extends Controller
                 foreach($punches as $j) {
                     $data->push([
                         'emp' => $j->employee->first_name . ' ' . $j->employee->last_name,
-                        'type' => $j->type,
                         'date_time' => date('F j, Y h:i:s A', strtotime($j->created_at)),
-                        'uuid' => $j->uuid,
                         'ip' => $j->ip_address,
                         'action' => GC::getLocation($j->latitude, $j->longitude, $j->id)
                     ]);
@@ -189,6 +184,6 @@ class AdminController extends Controller
     {
         EmployeeLog::truncate();
 
-        return 'ok';
+        return response('Log Purged!', 200);
     }
 }

@@ -59,21 +59,7 @@ class EmployeeController extends Controller
      */
     public function dashboard()
     {
-    	// get login and logout today
-
-        $in = EmployeeLog::where('user_id', Auth::user()->id)
-                        ->where('type', 'In')
-                        // ->whereDate('created_at', DB::raw('CURDATE()'))
-                        ->whereDate('created_at', date('Y-m-d', strtotime('8 hours')))
-                        ->first();
-        $out = EmployeeLog::where('user_id', Auth::user()->id)
-                        ->where('type', 'Out')
-                        // ->whereDate('created_at', DB::raw('CURDATE()'))
-                        ->whereDate('created_at', date('Y-m-d', strtotime('+8 hours')))
-                        ->first();
-        // if logout if available or out, disable punch with error do on front end
-
-    	return view('employee.dashboard', compact('in', 'out'));
+    	return view('employee.dashboard');
     }
 
 
@@ -81,33 +67,24 @@ class EmployeeController extends Controller
     /**
      * Pucnh Method : In or Out
      */
-    public function punch(Request $request, $lat, $lon, $uuid, $du)
+    public function punch(Request $request, $lat, $lon)
     {
     	if($request->ajax()) {
             $out = EmployeeLog::where('user_id', Auth::user()->id)
-                            ->where('type', 'Out')
                             ->whereDate('created_at', date('Y-m-d', strtotime('+8 hours')))
                             ->first();
-            if(!empty($out)) {
-                return abort(500);
-            }
 
     		$log = new EmployeeLog();
     		$log->user_id = Auth::user()->id;
-    		$log->manager_id = Auth::user()->manager->id;
+    		// $log->manager_id = Auth::user()->manager->id;
     		// in or out condition
-    		$log->type = GC::punchType(Auth::user()->id);
+    		// $log->type = GC::punchType(Auth::user()->id);
     		$log->latitude = $lat;
     		$log->longitude = $lon;
     		// $log->ip_address = $request->ip();
     		$log->ip_address = json_encode($request->ips());
-            $log->uuid = $uuid;
-            $log->du = $du;
     		if($log->save()) {
-                if($log->type == 'Out') {
-                    return 'out';
-                }
-    			return 'in';
+                return response('log saved', 200);
     		}
     		else {
     			return 'error saving log';
@@ -131,7 +108,6 @@ class EmployeeController extends Controller
             if(count($punches) > 0) {
                 foreach($punches as $j) {
                     $data->push([
-                        'type' => $j->type,
                         'date_time' => date('F j, Y h:i:s A', strtotime($j->created_at)),
                         'action' => GC::getLocation($j->latitude, $j->longitude, $j->id)
                     ]);
@@ -146,27 +122,4 @@ class EmployeeController extends Controller
     	return view('employee.punches');
     }
 
-
-
-    /**
-     * AJAX Data
-     */
-    public function inToday()
-    {
-        $in = EmployeeLog::where('user_id', Auth::user()->id)
-                        ->where('type', 'In')
-                        ->whereDate('created_at', date('Y-m-d', strtotime('+8 hours')))
-                        ->first();
-        return date('H:i:s A', strtotime($in->created_at));
-    }
-
-
-    public function outToday()
-    {
-        $out = EmployeeLog::where('user_id', Auth::user()->id)
-                        ->where('type', 'Out')
-                        ->whereDate('created_at', date('Y-m-d', strtotime('+8 hours')))
-                        ->first();
-        return date('H:i:s A', strtotime($out->created_at));
-    }
 }

@@ -58,20 +58,9 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-offset-5 col-sm-2 text-center">
-				@if(empty($in))
-					<p id="changepunchin">
-						<button id='punchin' data-text='Are you sure you want to time in?' class="round-btn btn btn-primary"><i class="fa fa-map-marker"></i> Punch In</button>
-					</p>
-				@else
-					<button id='punchout' @if(!empty($out)) disabled @endif data-text='Are you sure you want to time out?' class="round-btn btn btn-primary"><i class="fa fa-map-marker"></i> Punch Out</button>
-				@endif
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-offset-4 col-md-4 text-center">
-				<hr>
-				<p>Time In Today:  <b><span id="in">@if(!empty($in))  {{ date('H:i:s A', strtotime($in->created_at)) }} @else No Log @endif</span></b></p>
-				<p>Time Out Today: <b><span id="out">@if(!empty($out))  {{ date('H:i:s A', strtotime($out->created_at)) }} @else No Log @endif</span></b></p>
+				<p id="changepunchin">
+					<button id='punchin' data-text='Record on location and time log?' class="round-btn btn btn-primary"><i class="fa fa-map-marker"></i> Log In</button>
+				</p>
 			</div>
 		</div>
 		<div class="overlay"></div>
@@ -82,12 +71,12 @@
 @section('script')
 	<script src="{{ asset('js/jquery.js') }}"></script>
 	<script src="{{ asset('js/sweetalert.js') }}"></script>
-	<script src="{{ asset('js/device-uuid.min.js') }}"></script>
+	{{-- <script src="{{ asset('js/device-uuid.min.js') }}"></script> --}}
 	<script>
 		var options = {
 		  enableHighAccuracy: true,
-		  timeout: 5000,
-		  maximumAge: 10000
+		  timeout: 30000,
+		  maximumAge: 15000
 		};
 		function getLocation() {
 		  if (navigator.geolocation) {
@@ -109,30 +98,30 @@
 		  // "<br>Longitude: " + position.coords.longitude;
 		  // console.log('Latitude:' + position.coords.latitude);
 		  // console.log('Longitude:' + position.coords.longitude);
-		  var uuid = new DeviceUUID().get();
-		  var du = new DeviceUUID().parse();
-	    var dua = [
-	        du.language,
-	        du.platform,
-	        du.os,
-	        du.cpuCores,
-	        du.isAuthoritative,
-	        du.silkAccelerated,
-	        du.isKindleFire,
-	        du.isDesktop,
-	        du.isMobile,
-	        du.isTablet,
-	        du.isWindows,
-	        du.isLinux,
-	        du.isLinux64,
-	        du.isMac,
-	        du.isiPad,
-	        du.isiPhone,
-	        du.isiPod,
-	        du.isSmartTV,
-	        du.pixelDepth,
-	        du.isTouchScreen
-	    ];
+		  // var uuid = new DeviceUUID().get();
+		  // var du = new DeviceUUID().parse();
+	   //  var dua = [
+	   //      du.language,
+	   //      du.platform,
+	   //      du.os,
+	   //      du.cpuCores,
+	   //      du.isAuthoritative,
+	   //      du.silkAccelerated,
+	   //      du.isKindleFire,
+	   //      du.isDesktop,
+	   //      du.isMobile,
+	   //      du.isTablet,
+	   //      du.isWindows,
+	   //      du.isLinux,
+	   //      du.isLinux64,
+	   //      du.isMac,
+	   //      du.isiPad,
+	   //      du.isiPhone,
+	   //      du.isiPod,
+	   //      du.isSmartTV,
+	   //      du.pixelDepth,
+	   //      du.isTouchScreen
+	   //  ];
 		  if(position.coords.latitude == NaN || position.coords.longitude == NaN) {
 		  	$("body").removeClass("loading"); 
 	      Swal.fire({
@@ -144,7 +133,7 @@
 		  }
 		  else {
 			  $.ajax({
-			  	url: "/e/geoloc/punch/" + position.coords.latitude + "/" + position.coords.longitude + "/" + uuid + "/" + dua,
+			  	url: "/e/geoloc/punch/" + position.coords.latitude + "/" + position.coords.longitude,
 			  	type: "GET",
           success: function(data) {
           	console.log(data);
@@ -157,30 +146,7 @@
               confirmButtonColor: '#3085d6',
               cancelButtonColor: '#d33',
               confirmButtonText: 'Close'
-            });
-
-            // Show Time in or time out
-            // if time in and timeout on day disable button
-            if(data == 'in') {
-						  $.ajax({
-						  	url: "/e/in-today",
-						  	type: "GET",
-			          success: function(data) {
-			          	$('#in').html(data);
-			          	$('#changepunchin').html("<button id='punchout' data-text='Are you sure you want to time out?' class='round-btn btn btn-primary'><i class='fa fa-map-marker'></i> Punch Out</button>");
-			          }
-			        });
-            }
-            if(data == 'out') {
-						  $.ajax({
-						  	url: "/e/out-today",
-						  	type: "GET",
-			          success: function(data) {
-			          	$('#out').html(data);
-			          }
-			        });
-            	$("#punchout").attr("disabled", true);
-            }
+            });            
           },
           error: function(error) {
           	console.log(error);
@@ -254,7 +220,7 @@
         e.preventDefault();
         var text = $(this).data('text');
         Swal.fire({
-          title: 'Confirm Time In?',
+          title: 'Confirm Log In?',
           text: text,
           type: 'question',
           showCancelButton: true,
@@ -279,35 +245,7 @@
           }
         });
     });
-    $(document).on('click', '#punchout', function (e) {
-        e.preventDefault();
-        var text = $(this).data('text');
-        Swal.fire({
-          title: 'Confirm Time Out?',
-          text: text,
-          type: 'question',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Confirm'
-        }).then((result) => {
-          if (result.value) {
-          	getLocation();
 
-          }
-          else {
-            Swal.fire({
-              title: 'Action Cancelled',
-              text: "",
-              type: 'info',
-              showCancelButton: false,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Close'
-            });
-          }
-        });
-    });
 	</script>
 
 @endsection

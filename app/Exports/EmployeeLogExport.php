@@ -31,7 +31,7 @@ class EmployeeLogExport implements FromArray, WithHeadings, WithStyles, ShouldAu
     		array_push($d, [
     			GC::getLastName($a['user_id']),
     			GC::getFirstName($a['user_id']),
-    			$a['type'],
+                $a['latitude'] . ',' . $a['longitude'],
     			date('h:i:s A', strtotime($a['created_at'])),
     			date('F j, Y', strtotime($a['created_at'])),
     		]);
@@ -47,7 +47,7 @@ class EmployeeLogExport implements FromArray, WithHeadings, WithStyles, ShouldAu
         return [
             'Last Name',
             'First Name',
-            'Type',
+            'Coordinates',
             'Time',
             'Date',
         ];

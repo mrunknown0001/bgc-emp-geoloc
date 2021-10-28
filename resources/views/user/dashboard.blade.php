@@ -33,7 +33,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-4">
-				<div class="small-box bg-primary">
+				<div class="small-box bg-red">
 					<div class="inner">
 						<h3>Employees</h3>
 						<p>Employees</p>
@@ -46,13 +46,13 @@
 			</div>
 
 			<div class="col-md-4">
-				<div class="small-box bg-primary">
+				<div class="small-box bg-red">
 					<div class="inner">
 						<h3>Punches</h3>
 						<p>Punches</p>
 					</div>
 					<div class="icon">
-						<i class="fa fa-file"></i>
+						<i class="fa fa-map-marker"></i>
 					</div>
 					<a href="{{ route('user.punches') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 				</div>

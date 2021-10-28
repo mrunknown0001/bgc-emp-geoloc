@@ -67,7 +67,8 @@ class UserController extends Controller
     public function employees (Request $request)
     {
         if($request->ajax()) {
-            $employees = User::where('manager_id', Auth::user()->id)->get();
+            // Employees
+            $employees = User::where('role_id', 4)->get();
  
             $data = collect();
             if(count($employees) > 0) {
@@ -90,17 +91,14 @@ class UserController extends Controller
     public function employeeShowLog(Request $request, $id)
     {
         if($request->ajax()) {
-            $punches = EmployeeLog::where('manager_id', Auth::user()->id)
-                                ->where('user_id', $id)
+            $punches = EmployeeLog::where('user_id', $id)
                                 ->get();
  
             $data = collect();
             if(count($punches) > 0) {
                 foreach($punches as $j) {
                     $data->push([
-                        'type' => $j->type,
                         'date_time' => date('F j, Y h:i:s A', strtotime($j->created_at)),
-                        'uuid' => $j->uuid,
                         'ip' => $j->ip_address,
                         'action' => GC::getLocation($j->latitude, $j->longitude, $j->id)
                     ]);
@@ -119,16 +117,14 @@ class UserController extends Controller
     public function punches(Request $request)
     {
         if($request->ajax()) {
-        	$punches = EmployeeLog::where('manager_id', Auth::user()->id)->get();
+        	$punches = EmployeeLog::all();
  
             $data = collect();
             if(count($punches) > 0) {
                 foreach($punches as $j) {
                     $data->push([
                     	'emp' => $j->employee->first_name . ' ' . $j->employee->last_name,
-                        'type' => $j->type,
                         'date_time' => date('F j, Y h:i:s A', strtotime($j->created_at)),
-                        'uuid' => $j->uuid,
                         'ip' => $j->ip_address,
                         'action' => GC::getLocation($j->latitude, $j->longitude, $j->id)
                     ]);
