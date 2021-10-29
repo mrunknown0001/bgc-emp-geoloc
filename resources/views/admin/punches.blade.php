@@ -63,7 +63,7 @@
 		        serverSide: true,
             scrollX: true,
 		        columnDefs: [
-		          { className: "dt-center", targets: [ 0, 1, 2, 3, 4 ] }
+		          { className: "dt-center", targets: [ 0, 1, 2, 3 ] }
 		        ],
 		        ajax: "{{ route('admin.punches') }}",
 		        columns: [
