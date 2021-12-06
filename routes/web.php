@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-
-Route::get('/test', 'TestController@test');
+# This test route returns all users/locations in Second mysql database
+//Route::get('/test', 'TestController@test');
 
 // Route::get('/qr', 'GeneralController@qr');
 
@@ -14,19 +14,22 @@ Route::get('/', function () {
 
 // Route::get('/email', 'MailController@sendMail');
 
+
 # Login for User
 Route::get('/login', 'LoginController@login')->name('login');
 # Post Login for User
 Route::post('/login', 'LoginController@postLogin')->name('post.login');
+
 
 # Login for Admin
 Route::get('/admin/login', 'LoginController@adminLogin')->name('admin.login');
 #post Login for Admin
 Route::post('/admin/login', 'LoginController@postAdminLogin')->name('post.admin.login');
 
-# Login for Super Admin
 
+# Login for Super Admin
 Route::get('/logout', 'LoginController@logout')->name('logout');
+
 
 # Admin Route Group
 Route::group(['prefix' => 'a', 'middleware' => 'admin'], function () {
@@ -74,8 +77,8 @@ Route::group(['prefix' => 'm', 'middleware' => 'manager'], function () {
 	Route::get('/map/location/{id}', 'UserController@mapLocation')->name('user.map.location');
 	# Export Logs
 	Route::get('/export/logs', 'UserController@exportLogs')->name('user.export.logs');
-
 });
+
 
 # User Route Group
 Route::group(['prefix' => 'e', 'middleware' => 'employee'], function () {
@@ -90,4 +93,8 @@ Route::group(['prefix' => 'e', 'middleware' => 'employee'], function () {
 	Route::get('/geoloc/punch/{lat}/{lon}', 'EmployeeController@punch')->name('emp.punch');
 	# My PUnches
 	Route::get('/punches', 'EmployeeController@punches')->name('emp.punches');
+	# Show QR Scanner
+	Route::get('/qrscanner', 'EmployeeController@qrScanner')->name('emp.qr.scanner');
+	# Show Location/SubLocation
+	Route::get('/location/{cat}/{id}', 'EmployeeController@auditable')->name('emp.auditable');
 });

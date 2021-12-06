@@ -12,4 +12,9 @@ class Location extends Model
     {
     	return $this->hasMany('App\SubLocation');
     }
+
+    public function farm()
+    {
+        return $this->belongsTo('App\Farm');
+    }
 }

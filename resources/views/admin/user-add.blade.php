@@ -35,7 +35,7 @@
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<h3>User Detail</h3>
-				<form action="{{ route('admin.post.add.user') }}" method="POST">
+				<form id="addUserForm" action="{{ route('admin.post.add.user') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
 						<label for="first_name">First Name</label>
@@ -73,5 +73,46 @@
 @endsection
 
 @section('script')
-
+  <script>
+		$(document).ready(function() {
+      $('#addUserForm').on('submit',(function(e) {
+        e.preventDefault();
+        // Add Loading Animation here
+        $("body").addClass("loading"); 
+        var formData = new FormData(this);
+        $.ajax({
+          type:'POST',
+          url: $(this).attr('action'),
+          data:formData,
+          cache:false,
+          contentType: false,
+          processData: false,
+          success:function(data){
+            // Close Upload Animation here
+            $("body").removeClass("loading");
+            Swal.fire({
+              title: 'User Added!',
+              text: "",
+              type: 'success',
+              showCancelButton: false,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Close'
+            });
+            // Clear Form
+            $("#addUserForm").trigger("reset");
+          },
+          error: function(data){
+            console.log(data.responseJSON);
+            $("body").removeClass("loading");
+            Swal.fire({
+              type: 'error',
+              title: 'Error Occured',
+              text: 'Please Try Again.',
+            });
+          }
+        });
+      }));
+    });
+  </script>
 @endsection

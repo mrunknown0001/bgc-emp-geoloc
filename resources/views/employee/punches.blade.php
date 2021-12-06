@@ -61,6 +61,7 @@
 		        columnDefs: [
 		          { className: "dt-center", targets: [ 0, 1 ] }
 		        ],
+				order: [0, 'desc'],
 		        ajax: "{{ route('emp.punches') }}",
 		        columns: [
 		            {data: 'date_time', name: 'date_time'},

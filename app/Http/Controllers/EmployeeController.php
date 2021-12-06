@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\View;
 use App\EmployeeLog;
 use Auth;
 
@@ -11,6 +11,10 @@ use DataTables;
 
 use DB;
 use Hash;
+
+use App\Location;
+use App\SubLocation;
+use App\Farm;
 
 use App\Http\Controllers\GeneralController as GC;
 
@@ -65,7 +69,7 @@ class EmployeeController extends Controller
 
 
     /**
-     * Pucnh Method : In or Out
+     * Pucnh Method
      */
     public function punch(Request $request, $lat, $lon)
     {
@@ -84,25 +88,28 @@ class EmployeeController extends Controller
     		// $log->ip_address = $request->ip();
     		$log->ip_address = json_encode($request->ips());
     		if($log->save()) {
-                return response('log saved', 200);
+                return response('log saved', 200)
+                    ->header('Content-Type', 'text/plain');
     		}
     		else {
-    			return 'error saving log';
+                return response('Error Saving Log', 500)
+                    ->header('Content-Type', 'text/plain');
     		}
     	}
     	else {
-    		return 'ajax error';
+            return response('AJAX Error', 500)
+                ->header('Content-Type', 'text/plain');
     	}
     }
 
 
     /**
-     * punches 
+     * Punches 
      */
     public function punches (Request $request)
     {
         if($request->ajax()) {
-        	$punches = EmployeeLog::where('user_id', Auth::user()->id)->get();
+        	$punches = EmployeeLog::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
  
             $data = collect();
             if(count($punches) > 0) {
@@ -120,6 +127,37 @@ class EmployeeController extends Controller
         }
 
     	return view('employee.punches');
+    }
+
+
+    /**
+     * QR Code Scanner
+     */
+    public function qrScanner()
+    {
+        return View::make('employee.qr');
+    }
+
+
+    /**
+     * Auditable Location
+     */
+    public function auditable($cat, $id)
+    {
+        // Location Category
+        if($cat == 'loc') {
+            $location = Location::findorfail($id);
+        }
+        // Sub Location Category
+        elseif($cat == 'sub') {
+            $location = SubLocation::findorfail($id);
+        }
+        else {
+            return abort(404);
+        }
+
+        // Redirect to inteded URL for reporting with images
+        return view('employee.report-make', compact('location'));
     }
 
 }

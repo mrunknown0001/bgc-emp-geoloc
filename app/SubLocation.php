@@ -12,4 +12,9 @@ class SubLocation extends Model
     {
     	return $this->belongsTo('App\Location');
     }
+
+    public function farm()
+    {
+        return $this->belongsTo('App\Farm');
+    }
 }

@@ -12,7 +12,7 @@ class TestController extends Controller
     {
     	$users = DB::connection('mysql2')->table('users')->get();
 
-    	// return $users;
+    	return $users;
     	$locations = Location::all();
     	$location = Location::find(1);
     	return $location->sub_locations;

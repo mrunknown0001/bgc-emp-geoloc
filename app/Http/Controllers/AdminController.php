@@ -117,7 +117,8 @@ class AdminController extends Controller
         $user->password = bcrypt($request->password);
         $user->save();
 
-        return redirect()->back()->with('success', 'User Added!');
+        return response('User Added', 200)
+            ->header('Content-Type', 'text/plain');
     }
 
 
@@ -149,7 +150,8 @@ class AdminController extends Controller
         $user->active = $request->active != NULL && $request->active == 'on' ? 1 : 0;
         $user->save();
 
-        return redirect()->back()->with('success', 'User Updated!');
+        return response('User Updated', 200)
+            ->header('Content-Type', 'text/plain');
     }
 
 

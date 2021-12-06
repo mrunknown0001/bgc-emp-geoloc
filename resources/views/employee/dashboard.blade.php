@@ -12,24 +12,6 @@
 			border-radius: 50%;
 		}
 
-    .overlay{
-        display: none;
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        z-index: 999;
-        background: rgba(255,255,255,0.8) url("/gif/loading-buffering.gif") center no-repeat;
-    }
-    /* Turn off scrollbar when body element has the loading class */
-    body.loading{
-        overflow: hidden;   
-    }
-    /* Make spinner image visible when body element has the loading class */
-    body.loading .overlay{
-        display: block;
-    }
 	</style>
 @endsection
 
@@ -59,8 +41,20 @@
 		<div class="row">
 			<div class="col-sm-offset-5 col-sm-2 text-center">
 				<p id="changepunchin">
-					<button id='punchin' data-text='Record on location and time log?' class="round-btn btn btn-primary"><i class="fa fa-map-marker"></i> Log In</button>
-				</p>
+					<button id='punchin' data-text='Record on location and time log?' class="round-btn btn btn-primary"><i class="fa fa-map-marker fa-2x"></i> <span style="font-size:20px">Log In</span></button>
+          <br>
+          <i>Log Puncher</i>
+        </p>
+			</div>
+		</div>
+    <hr>
+		<div class="row">
+			<div class="col-sm-offset-5 col-sm-2 text-center">
+				<p id="qr-scanner-wrap">
+					<a href="{{ route('emp.qr.scanner') }}" id="qr-scanner" class="btn btn-primary"><i class="fa fa-qrcode fa-4x"></i></a>
+          <br>
+          <i>QR Scanner</i>
+        </p>
 			</div>
 		</div>
 		<div class="overlay"></div>
@@ -74,9 +68,9 @@
 	{{-- <script src="{{ asset('js/device-uuid.min.js') }}"></script> --}}
 	<script>
 		var options = {
-		  enableHighAccuracy: true,
+		  enableHighAccuracy: false,
 		  timeout: 30000,
-		  maximumAge: 15000
+		  maximumAge: 10
 		};
 		function getLocation() {
 		  if (navigator.geolocation) {
@@ -100,28 +94,28 @@
 		  // console.log('Longitude:' + position.coords.longitude);
 		  // var uuid = new DeviceUUID().get();
 		  // var du = new DeviceUUID().parse();
-	   //  var dua = [
-	   //      du.language,
-	   //      du.platform,
-	   //      du.os,
-	   //      du.cpuCores,
-	   //      du.isAuthoritative,
-	   //      du.silkAccelerated,
-	   //      du.isKindleFire,
-	   //      du.isDesktop,
-	   //      du.isMobile,
-	   //      du.isTablet,
-	   //      du.isWindows,
-	   //      du.isLinux,
-	   //      du.isLinux64,
-	   //      du.isMac,
-	   //      du.isiPad,
-	   //      du.isiPhone,
-	   //      du.isiPod,
-	   //      du.isSmartTV,
-	   //      du.pixelDepth,
-	   //      du.isTouchScreen
-	   //  ];
+			//  var dua = [
+			//      du.language,
+			//      du.platform,
+			//      du.os,
+			//      du.cpuCores,
+			//      du.isAuthoritative,
+			//      du.silkAccelerated,
+			//      du.isKindleFire,
+			//      du.isDesktop,
+			//      du.isMobile,
+			//      du.isTablet,
+			//      du.isWindows,
+			//      du.isLinux,
+			//      du.isLinux64,
+			//      du.isMac,
+			//      du.isiPad,
+			//      du.isiPhone,
+			//      du.isiPod,
+			//      du.isSmartTV,
+			//      du.pixelDepth,
+			//      du.isTouchScreen
+			//  ];
 		  if(position.coords.latitude == NaN || position.coords.longitude == NaN) {
 		  	$("body").removeClass("loading"); 
 	      Swal.fire({
@@ -132,6 +126,7 @@
 				});
 		  }
 		  else {
+        // alert(position.coords.accuracy)
 			  $.ajax({
 			  	url: "/e/geoloc/punch/" + position.coords.latitude + "/" + position.coords.longitude,
 			  	type: "GET",
@@ -244,6 +239,16 @@
             });
           }
         });
+    });
+
+    $(document).ready(function() {
+      var id = navigator.geolocation.watchPosition(showLoc);
+
+      function showLoc(position) {
+        
+      }
+
+      navigator.geolocation.clearWatch(id);
     });
 
 	</script>
