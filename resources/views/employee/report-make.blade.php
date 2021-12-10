@@ -29,14 +29,8 @@
 		</div>
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
-				<form action="" method="POST" enctype="multipart/form-data">
-					<div class="form-group {{ $errors->first('farm_name') ? 'has-error' : ''  }}">
-						<label for="farm_name">Farm Name</label>
-						<input type="text" name="farm_name" id="farm_name" placeholder="Farm Name" class="form-control" required>
-						@if($errors->first('farm_name'))
-            	<span class="help-block"><strong>{{ $errors->first('farm_name') }}</strong></span>
-            @endif
-					</div>
+				<form action="{{ route('submit.report') }}" method="POST" enctype="multipart/form-data">
+					@csrf
 					<div class="form-group text-center">
 						<div class="image-upload">
 							<input type="file" class="uploadcam" name="upload" id="upload" accept="image/*" capture style="display: none">
@@ -47,6 +41,19 @@
 						</div>
 						<p><small>Multiple Image Upload. One at a time capture.</small></p>
 					</div>
+
+					<div class="form-group {{ $errors->first('remarks') ? 'has-error' : ''  }}">
+						<label for="remarks">Remarks</label>
+						<input type="text" name="remarks" id="remarks" placeholder="Remarks" class="form-control">
+						@if($errors->first('remarks'))
+            	<span class="help-block"><strong>{{ $errors->first('remarks') }}</strong></span>
+            @endif
+					</div>
+
+					<div class="form-group text-center">
+						<button class="btn btn-primary"></button>
+					</div>
+
 				</form>
 			</div>
 		</div>

@@ -97,4 +97,9 @@ Route::group(['prefix' => 'e', 'middleware' => 'employee'], function () {
 	Route::get('/qrscanner', 'EmployeeController@qrScanner')->name('emp.qr.scanner');
 	# Show Location/SubLocation
 	Route::get('/location/{cat}/{id}', 'EmployeeController@auditable')->name('emp.auditable');
+	# Submit Report Route
+	Route::post('/report/submit', 'ReportController@submit')->name('submit.report');
+	Route::get('/report/submit', function () {
+		return redirect()->route('emp.qr.scanner');
+	});
 });
