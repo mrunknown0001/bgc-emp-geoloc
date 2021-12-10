@@ -51,7 +51,7 @@
 					</div>
 
 					<div class="form-group text-center">
-						<button class="btn btn-primary"></button>
+						<button class="btn btn-primary"><i class="fa fa-upload fa-3x"></i> Submit</button>
 					</div>
 
 				</form>
