@@ -29,7 +29,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
-				<form action="{{ route('submit.report') }}" method="POST" enctype="multipart/form-data">
+				<form id="reportform" action="{{ route('submit.report') }}" method="POST" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group text-center">
 						<div class="image-upload">
@@ -62,5 +62,51 @@
 @endsection
 
 @section('script')
+<script>
+		$(document).ready(function() {
 
+		  $('#reportform').on('submit',(function(e) {
+		    e.preventDefault();
+
+				// Add Loading Animation here
+		  	$("body").addClass("loading"); 
+		    var formData = new FormData(this);
+		    $.ajax({
+		      type:'POST',
+		      url: $(this).attr('action'),
+		      data:formData,
+		      cache:false,
+		      contentType: false,
+		      processData: false,
+		      success:function(data){
+		        // console.log("success");
+		        // console.log(data);
+		        // Close Upload Animation here
+		        $("body").removeClass("loading");
+		        Swal.fire({
+		          title: 'Report Submitted!',
+		          text: "",
+		          type: 'success',
+		          showCancelButton: false,
+		          confirmButtonColor: '#3085d6',
+		          cancelButtonColor: '#d33',
+		          confirmButtonText: 'Close'
+		        });
+		        // Clear Form
+		        $("#reportform").trigger("reset");
+		      },
+		      error: function(data){
+		        console.log(data.responseJSON);
+		        $("body").removeClass("loading");
+			      Swal.fire({
+						  type: 'error',
+						  title: 'Error Occured',
+						  text: 'Please Try Again.',
+						});
+		      }
+		    });
+		  }));
+
+		});
+</script>
 @endsection
