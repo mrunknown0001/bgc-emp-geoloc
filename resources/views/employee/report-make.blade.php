@@ -19,7 +19,7 @@
 @section('content')
 	<div class="content-wrapper">
 	<section class="content-header text-center">
-		<h1>Make Report: {{ $location->farm->code }}</h1>
+		<h1>Make Report: {{ $location->farm->code }} {{ $cat == 'loc' ? $location->location_name : $location->sub_location_name }}</h1>
 	</section>
 	<section class="content">
 		<div class="row">

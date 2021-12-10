@@ -157,7 +157,7 @@ class EmployeeController extends Controller
         }
 
         // Redirect to inteded URL for reporting with images
-        return view('employee.report-make', compact('location'));
+        return view('employee.report-make', compact('location', 'cat'));
     }
 
 }

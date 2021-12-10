@@ -1,7 +1,7 @@
   <header class="main-header">
     <a href="javascript:void(0)" class="logo">
-      <span class="logo-mini"><b>Geo</b></span>
-      <span class="logo-lg"><b>GeoLocator</b></span>
+      <span class="logo-mini"><b>OLRF</b></span>
+      <span class="logo-lg"><b>Reporting</b></span>
     </a>
     <nav class="navbar navbar-static-top">
       <a href="javascript:void(0)" class="header-menu-custom" data-toggle="push-menu" role="button">
