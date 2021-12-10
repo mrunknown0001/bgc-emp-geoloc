@@ -27,7 +27,7 @@
       <div class="login-box">
         <div class="login-logo">
           <img  class="img" height="60px" src="{{ asset('img/bgc_logo.png') }}" alt="BGC">
-          <p>Geo Location Puncher</p>
+          <p>On-line Reporting Facility</p>
         </div>
         <div class="login-box-body">
           @include('includes.success')
