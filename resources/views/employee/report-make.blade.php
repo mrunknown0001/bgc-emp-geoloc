@@ -19,7 +19,7 @@
 @section('content')
 	<div class="content-wrapper">
 	<section class="content-header text-center">
-		<h1>Make Report: {{ $location->farm->code }} - {{ $cat == 'loc' ? $location->has_sublocation == 0 ? $location->location_name : '<i>(Can\'t Create Report)</i>' : $location->location->location_name . ' - ' . $location->sub_location_name }}</h1>
+		<h1>Make Report: {{ $location->farm->code }} - {{ $cat == 'loc' ? $location->has_sublocation == 0 ? $location->location_name : 'Can\'t Create Report' : $location->location->location_name . ' - ' . $location->sub_location_name }}</h1>
 	</section>
 	<section class="content">
 		<div class="row">
