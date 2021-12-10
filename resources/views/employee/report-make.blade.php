@@ -39,9 +39,9 @@
 					</div>
 					<div class="form-group text-center">
 						<div class="image-upload">
-							<input type="file" class="uploadcam" data-id="{{ $l->id }}" id="upload-{{ $l->id }}" name="upload" accept="image/*" capture style="display: none">
+							<input type="file" class="uploadcam" name="upload" accept="image/*" capture style="display: none">
 							{{-- <input type="file" class="uploadcam" data-id="{{ $l->id }}" id="upload-{{ $l->id }}" name="upload" accept="image/*;capture=camera" style="display: none"> --}}
-							<label for="upload-{{ $l->id }}">
+							<label for="upload">
 								<span id="camera" class="btn btn-primary"><i class="fa fa-camera fa-3x"></i></span>
 							</label>
 						</div>
