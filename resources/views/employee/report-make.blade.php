@@ -27,6 +27,29 @@
 				@include('includes.all')
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<form action="" method="POST" enctype="multipart/form-data">
+					<div class="form-group {{ $errors->first('farm_name') ? 'has-error' : ''  }}">
+						<label for="farm_name">Farm Name</label>
+						<input type="text" name="farm_name" id="farm_name" placeholder="Farm Name" class="form-control" required>
+						@if($errors->first('farm_name'))
+            	<span class="help-block"><strong>{{ $errors->first('farm_name') }}</strong></span>
+            @endif
+					</div>
+					<div class="form-group text-center">
+						<div class="image-upload">
+							<input type="file" class="uploadcam" data-id="{{ $l->id }}" id="upload-{{ $l->id }}" name="upload" accept="image/*" capture style="display: none">
+							{{-- <input type="file" class="uploadcam" data-id="{{ $l->id }}" id="upload-{{ $l->id }}" name="upload" accept="image/*;capture=camera" style="display: none"> --}}
+							<label for="upload-{{ $l->id }}">
+								<span id="camera" class="btn btn-primary"><i class="fa fa-camera fa-3x"></i></span>
+							</label>
+						</div>
+						<p><small>Multiple Image Upload. One at a time capture.</small></p>
+					</div>
+				</form>
+			</div>
+		</div>
 	</section>
 </div>
 @endsection
