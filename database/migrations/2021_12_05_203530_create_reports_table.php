@@ -23,6 +23,7 @@ class CreateReportsTable extends Migration
             $table->string('latitude', 20)->nullable();
             $table->string('longitude', 20)->nullable();
             $table->timestamps();
+            // $table->string('remarks')->nullable(); // Added on Update Reports Migation
         });
     }
 

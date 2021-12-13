@@ -31,6 +31,8 @@
 			<div class="col-md-6 col-md-offset-3">
 				<form id="reportform" action="{{ route('submit.report') }}" method="POST" enctype="multipart/form-data">
 					@csrf
+					<input type="hidden" name="cat" value="{{ $cat }}">
+					<input type="hidden" name="location_id" value="{{ $location->id }}">
 					<div class="form-group text-center">
 						<div class="image-upload">
 							<input type="file" class="uploadcam" name="upload" id="upload" accept="image/*" capture style="display: none">
