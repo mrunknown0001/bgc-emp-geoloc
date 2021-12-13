@@ -9,6 +9,9 @@ use Auth;
 use App\Report;
 use App\ReportImage;
 
+use Carbon\Carbon;
+use Image;
+
 class ReportController extends Controller
 {
     /**

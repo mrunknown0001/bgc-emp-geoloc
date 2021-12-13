@@ -31,8 +31,11 @@
 			<div class="col-md-6 col-md-offset-3">
 				<form id="reportform" action="{{ route('submit.report') }}" method="POST" enctype="multipart/form-data">
 					@csrf
+					<input type="hidden" name="id" value="">
 					<input type="hidden" name="cat" value="{{ $cat }}">
 					<input type="hidden" name="location_id" value="{{ $location->id }}">
+					<input type="hidden" class="lat" name="lat" id="latitude">
+					<input type="hidden" class="lon" name="lon" id="longitude">
 					<div class="form-group text-center">
 						<div class="image-upload">
 							<input type="file" class="uploadcam" name="upload" id="upload" accept="image/*" capture style="display: none">
@@ -108,6 +111,51 @@
 		      }
 		    });
 		  }));
+
+
+			var options = {
+			  enableHighAccuracy: false,
+			  timeout: 30000,
+			  maximumAge: 15000
+			};
+
+			function getLocation() {
+			  if (navigator.geolocation) {
+			    navigator.geolocation.getCurrentPosition(showPosition, showError, options);
+			  } else { 
+		      console.log('Geolocation Error');
+			  }
+			}
+
+			function showPosition(position) {
+				$('.lon').val(position.coords.longitude);
+				$('.lat').val(position.coords.latitude)
+				// console.log('Longitude:' + position.coords.longitude);
+				// console.log('Latitude:' + position.coords.latitude);
+			}
+
+			function showError(error) {
+				// Error Show on Sweet Alert
+			  switch(error.code) {
+			    case error.PERMISSION_DENIED:
+			      // x.innerHTML = "User denied the request for Geolocation."
+			      console.log("User denied the request for Geolocation.");
+			      break;
+			    case error.POSITION_UNAVAILABLE:
+			      // x.innerHTML = "Location information is unavailable."
+			      console.log("Location information is unavailable.");
+			      break;
+			    case error.TIMEOUT:
+			      // x.innerHTML = "The request to get user location timed out."
+			      console.log("The request to get user location timed out.");
+			      break;
+			    case error.UNKNOWN_ERROR:
+			      // x.innerHTML = "An unknown error occurred."
+			      console.log("An unknown error occurred.");
+			      break;
+			  }
+			}
+
 
 		});
 </script>
