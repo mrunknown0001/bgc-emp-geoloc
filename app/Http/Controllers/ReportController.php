@@ -32,7 +32,7 @@ class ReportController extends Controller
                     	'farm' => $j->farm->code,
                     	'location' => $j->cat == 'loc' ? $j->loc->location_code : $j->sub->location->location_code . ' - ' . $j->sub->sub_location_code,
                         'date_time' => date('F j, Y h:i:s A', strtotime($j->created_at)),
-                        'action' => 'action'
+                        'action' => '<button class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> View</button>'
                     ]);
                 }
             }
