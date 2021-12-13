@@ -107,6 +107,6 @@ class ReportController extends Controller
     {
     	$data = Report::findorfail($id);
 
-    	return $data;
+    	return view('employee.report-details', compact('data'));
     }
 }
