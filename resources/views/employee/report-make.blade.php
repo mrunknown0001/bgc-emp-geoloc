@@ -74,7 +74,11 @@
 		    e.preventDefault();
 				if ($('#upload').get(0).files.length === 0) {
 				    // console.log("No files selected.");
-				    alert('no image');
+			      Swal.fire({
+						  type: 'error',
+						  title: 'Image is Required',
+						  text: 'Please Capture Image',
+						});
 				}
 				// Add Loading Animation here
 		  	$("body").addClass("loading"); 
