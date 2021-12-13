@@ -69,7 +69,7 @@
 @section('script')
 <script>
 		$(document).ready(function() {
-
+			getLocation();
 		  $('#reportform').on('submit',(function(e) {
 		    e.preventDefault();
 
@@ -97,21 +97,21 @@
 		          cancelButtonColor: '#d33',
 		          confirmButtonText: 'Close'
 		        }).then((result) => {
-	          if (result.value) {
-	            window.location.replace({{ route('emp.dashboard') }});
-	          }
-	          else {
-	            Swal.fire({
-	              title: 'Action Cancelled',
-	              text: "",
-	              type: 'info',
-	              showCancelButton: false,
-	              confirmButtonColor: '#3085d6',
-	              cancelButtonColor: '#d33',
-	              confirmButtonText: 'Close'
-	            });
-	          }
-	        });
+		          if (result.value) {
+		            window.location.replace({{ route('emp.dashboard') }});
+		          }
+		          else {
+		            Swal.fire({
+		              title: 'Action Cancelled',
+		              text: "",
+		              type: 'info',
+		              showCancelButton: false,
+		              confirmButtonColor: '#3085d6',
+		              cancelButtonColor: '#d33',
+		              confirmButtonText: 'Close'
+		            });
+		          }
+		        });
 		        // Clear Form
 		        $("#reportform").trigger("reset");
 		      },
