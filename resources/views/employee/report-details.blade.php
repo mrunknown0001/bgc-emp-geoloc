@@ -31,7 +31,7 @@
 				@include('includes.all')
 			</div>
 			<div class="col-md-8">
-				<p>Location: {{ $data->cat == 'loc' ? $data->loc->location_code : $data->sub->location->location_code . ' - ' . $data->sub->sub_location_code }}</p>
+				<p>Location: <strong>{{ $data->farm->code }} - {{ $data->cat == 'loc' ? $data->loc->location_name : $data->sub->location->location_name . ' - ' . $data->sub->sub_location_name }}</strong></p>
 			</div>
 		</div>
 		<div class="overlay"></div>
