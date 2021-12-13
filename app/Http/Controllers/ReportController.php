@@ -32,7 +32,7 @@ class ReportController extends Controller
                     	'farm' => $j->farm->code,
                     	'location' => $j->cat == 'loc' ? $j->loc->location_code : $j->sub->location->location_code . ' - ' . $j->sub->sub_location_code,
                         'date_time' => date('F j, Y h:i:s A', strtotime($j->created_at)),
-                        'action' => '<button class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> View</button>'
+                        'action' => '<button id="view" data-id="' . $j->id . '" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> View</button>'
                     ]);
                 }
             }
@@ -99,5 +99,14 @@ class ReportController extends Controller
 	        return response('Report Submitted', 200)
                       ->header('Content-Type', 'text/plain');
     	}
+    }
+
+
+
+    public function reportDetail($id)
+    {
+    	$data = Report::findorfail($id);
+
+    	return $data;
     }
 }

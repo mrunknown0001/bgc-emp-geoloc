@@ -71,6 +71,39 @@
 		            {data: 'action', name: 'action', orderable: false, searchable: false},
 		        ]
 	      });
+
+
+	    $(document).on('click', '#view', function (e) {
+	        e.preventDefault();
+	        var id = $(this).data('id');
+	        // var text = $(this).data('text');
+	        Swal.fire({
+	          title: 'View Details?',
+	          text: '',
+	          type: 'question',
+	          showCancelButton: true,
+	          confirmButtonColor: '#3085d6',
+	          cancelButtonColor: '#d33',
+	          confirmButtonText: 'Continue'
+	        }).then((result) => {
+	          if (result.value) {
+	            // view here
+	            window.location.replace("/a/user/update/" + id);
+
+	          }
+	          else {
+	            Swal.fire({
+	              title: 'Action Cancelled',
+	              text: "",
+	              type: 'info',
+	              showCancelButton: false,
+	              confirmButtonColor: '#3085d6',
+	              cancelButtonColor: '#d33',
+	              confirmButtonText: 'Close'
+	            });
+	          }
+	        });
+	    });
 		});
 	</script>
 @endsection

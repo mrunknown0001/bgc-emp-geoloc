@@ -104,4 +104,6 @@ Route::group(['prefix' => 'e', 'middleware' => 'employee'], function () {
 	});
 	# My Reports | Reports Submitted
 	Route::get('/reports', 'ReportController@reports')->name('reports');
+	# Reprot Details
+	Route::get('/report/detail/{id}', 'ReportController@reportDetail')->name('report.details');
 });
