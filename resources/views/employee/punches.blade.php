@@ -32,14 +32,14 @@
 				@include('includes.all')
 			</div>
 			<div class="col-md-12">
-		      <table id="punches" class="table cell-border compact stripe hover display nowrap" width="99%">
-			      <thead>
-		          <tr>
-		            <th scope="col">Date & Time</th>
-		            <th scope="col">Action</th>
-		          </tr>
-		        </thead>
-		      </table>
+	      <table id="punches" class="table cell-border compact stripe hover display nowrap" width="99%">
+		      <thead>
+	          <tr>
+	            <th scope="col">Date & Time</th>
+	            <th scope="col">Action</th>
+	          </tr>
+	        </thead>
+	      </table>
 			</div>
 		</div>
 	</section>
@@ -50,7 +50,6 @@
 	
 	<script src="{{ asset('js/dataTables.js') }}"></script>
 	<script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
-	<script src="{{ asset('js/sweetalert.js') }}"></script>
 
 	<script>
 		$(document).ready(function () {

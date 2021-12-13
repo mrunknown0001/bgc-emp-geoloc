@@ -12,15 +12,36 @@ use App\ReportImage;
 use Carbon\Carbon;
 use Image;
 
+use DataTables;
+
 class ReportController extends Controller
 {
 
 	/**
 	 * User Submitted Report
 	 */
-	public function reports()
+	public function reports(Request $request)
 	{
-		return 'reports';
+        if($request->ajax()) {
+        	$reports = Report::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+ 
+            $data = collect();
+            if(count($reports) > 0) {
+                foreach($reports as $j) {
+                    $data->push([
+                    	'farm' => 'farm',
+                    	'location' => 'location',
+                        'date_time' => date('F j, Y h:i:s A', strtotime($j->created_at)),
+                        'action' => 'action'
+                    ]);
+                }
+            }
+            return DataTables::of($data)
+                    ->rawColumns(['action'])
+                    ->make(true);
+
+        }
+		return view('employee.reports');
 	}
 
     /**

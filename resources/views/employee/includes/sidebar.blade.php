@@ -16,7 +16,7 @@
       </li>
       <li class="{{ route('reports') == url()->current() ? 'active' : ''}}">
         <a href="{{ route('reports') }}">
-          <i class="fa fa-lists"></i> <span>My Reports</span>
+          <i class="fa fa-list"></i> <span>My Reports</span>
         </a>
       </li>
     </ul>

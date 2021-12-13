@@ -5,7 +5,8 @@
 @endsection
 
 @section('style')
-
+  <link href="{{ asset('datatables/jquery.dataTables.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('header')
@@ -30,13 +31,46 @@
 			<div class="col-md-12">
 				@include('includes.all')
 			</div>
+			<div class="col-md-12">
+	      <table id="reports" class="table cell-border compact stripe hover display nowrap" width="99%">
+		      <thead>
+	          <tr>
+	            <th scope="col">Farm</th>
+	            <th scope="col">Location</th>
+	            <th scope="col">Date & Time</th>
+	            <th scope="col">Action</th>
+	          </tr>
+	        </thead>
+	      </table>
+			</div>
 		</div>
-
 		<div class="overlay"></div>
 	</section>
 </div>
 @endsection
 
 @section('script')
+	<script src="{{ asset('js/dataTables.js') }}"></script>
+	<script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
 
+	<script>
+		$(document).ready(function () {
+			let jotable = $('#reports').DataTable({
+		        processing: true,
+		        serverSide: true,
+		        scrollX: true,
+		        columnDefs: [
+		          { className: "dt-center", targets: [ 0, 1, 2, 3 ] }
+		        ],
+				order: [0, 'desc'],
+		        ajax: "{{ route('farms') }}",
+		        columns: [
+		            {data: 'farm', name: 'farm'},
+		            {data: 'location', name: 'location'},
+		            {data: 'date_time', name: 'date_time'},
+		            {data: 'action', name: 'action', orderable: false, searchable: false},
+		        ]
+	      });
+		});
+	</script>
 @endsection
