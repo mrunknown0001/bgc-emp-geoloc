@@ -79,6 +79,7 @@
 						  title: 'Image is Required',
 						  text: 'Please Capture Image',
 						});
+						return null;
 				}
 				// Add Loading Animation here
 		  	$("body").addClass("loading"); 
