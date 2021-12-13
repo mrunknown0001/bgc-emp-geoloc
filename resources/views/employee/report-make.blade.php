@@ -128,6 +128,11 @@
 		  }));
 
 
+		  $('#upload').change(function() {
+		  	
+		  });
+
+
 			var options = {
 			  enableHighAccuracy: false,
 			  timeout: 30000,
