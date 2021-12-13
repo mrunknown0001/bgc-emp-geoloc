@@ -14,6 +14,11 @@
           <i class="fa fa-stream"></i> <span>My Punches</span>
         </a>
       </li>
+      <li class="{{ route('reports') == url()->current() ? 'active' : ''}}">
+        <a href="{{ route('reports') }}">
+          <i class="fa fa-lists"></i> <span>My Reports</span>
+        </a>
+      </li>
     </ul>
   </section>
 </aside>
