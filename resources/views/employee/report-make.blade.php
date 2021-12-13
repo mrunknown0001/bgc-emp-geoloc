@@ -96,7 +96,7 @@
 		        $("#reportform").trigger("reset");
 		      },
 		      error: function(data){
-		        console.log(data.responseJSON);
+		        console.log(data);
 		        $("body").removeClass("loading");
 			      Swal.fire({
 						  type: 'error',
