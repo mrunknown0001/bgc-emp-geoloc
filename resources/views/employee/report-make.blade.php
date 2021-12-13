@@ -98,7 +98,7 @@
 		          confirmButtonText: 'Close'
 		        }).then((result) => {
 		          if (result.value) {
-		            window.location.replace({{ route('emp.dashboard') }});
+		            window.location.replace("{{ route('emp.dashboard') }}");
 		          }
 		          else {
 		            Swal.fire({
@@ -129,7 +129,7 @@
 
 
 		  $('#upload').change(function() {
-		  	
+
 		  });
 
 
