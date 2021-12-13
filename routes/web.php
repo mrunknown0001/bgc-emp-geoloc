@@ -102,4 +102,6 @@ Route::group(['prefix' => 'e', 'middleware' => 'employee'], function () {
 	Route::get('/report/submit', function () {
 		return redirect()->route('emp.qr.scanner');
 	});
+	# My Reports | Reports Submitted
+	Route::get('/reports', 'ReportController@reports')->name('reports');
 });

@@ -14,6 +14,15 @@ use Image;
 
 class ReportController extends Controller
 {
+
+	/**
+	 * User Submitted Report
+	 */
+	public function reports()
+	{
+		return 'reports';
+	}
+
     /**
      * Submit Report
      */
