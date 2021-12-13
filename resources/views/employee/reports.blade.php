@@ -63,7 +63,7 @@
 		          { className: "dt-center", targets: [ 0, 1, 2, 3 ] }
 		        ],
 				order: [0, 'desc'],
-		        ajax: "{{ route('farms') }}",
+		        ajax: "{{ route('reports') }}",
 		        columns: [
 		            {data: 'farm', name: 'farm'},
 		            {data: 'location', name: 'location'},
