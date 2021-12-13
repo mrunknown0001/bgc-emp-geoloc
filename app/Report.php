@@ -26,6 +26,6 @@ class Report extends Model
 
     public function sub()
     {
-    	return $this->belongsTo('App\SubLocaton');
+    	return $this->belongsTo('App\SubLocation');
     }
 }
