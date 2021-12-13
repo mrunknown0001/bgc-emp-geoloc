@@ -29,7 +29,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
-				<form id="reportform" action="{{ route('submit.report') }}" method="POST" enctype="multipart/form-data">
+				<form id="reportform" action="{{ route('submit.report') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
 					@csrf
 					<input type="hidden" name="id" value="">
 					<input type="hidden" name="cat" value="{{ $cat }}">
@@ -96,7 +96,22 @@
 		          confirmButtonColor: '#3085d6',
 		          cancelButtonColor: '#d33',
 		          confirmButtonText: 'Close'
-		        });
+		        }).then((result) => {
+	          if (result.value) {
+	            window.location.replace({{ route('emp.dashboard') }});
+	          }
+	          else {
+	            Swal.fire({
+	              title: 'Action Cancelled',
+	              text: "",
+	              type: 'info',
+	              showCancelButton: false,
+	              confirmButtonColor: '#3085d6',
+	              cancelButtonColor: '#d33',
+	              confirmButtonText: 'Close'
+	            });
+	          }
+	        });
 		        // Clear Form
 		        $("#reportform").trigger("reset");
 		      },
