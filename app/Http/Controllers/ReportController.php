@@ -60,10 +60,10 @@ class ReportController extends Controller
             $report->latitude = $request->lat;
             $report->longitude = $request->lon;
             $report->cat = $request->cat;
-            if($cat == 'loc') {
+            if($request->cat == 'loc') {
             	$report->location_id = $request->location_id;
             }
-            elseif($cat == 'sub') {
+            elseif($request->cat == 'sub') {
             	$report->sub_location_id = $request->location_id;
             }
             else {
