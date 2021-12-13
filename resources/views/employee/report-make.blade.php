@@ -72,7 +72,9 @@
 			getLocation();
 		  $('#reportform').on('submit',(function(e) {
 		    e.preventDefault();
-
+		    if($("#upload").val() == '') {
+		    	alert('no upload')
+		    }
 				// Add Loading Animation here
 		  	$("body").addClass("loading"); 
 		    var formData = new FormData(this);
