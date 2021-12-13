@@ -32,6 +32,51 @@ class ReportController extends Controller
     		$request->validate([
     			'upload' => 'required'
     		]);
+
+    		$report = new Report();
+    		$report->user_id = Auth::user()->id;
+    		$report->farm_id = '';
+            $report->latitude = $request->lat;
+            $report->longitude = $request->lon;
+            $report->cat = $request-cat;
+            if($cat == 'loc') {
+            	$report->location_id = $request->location_id;
+            }
+            elseif($cat == 'sub') {
+            	$report->sub_location_id = $request->location_id;
+            }
+            else {
+            	return response('Error in Category Input', 501);
+            }
+            $report->farm_id = $request->farm;
+            $report->remarks = $request->remarks;
+            $report->save();
+
+	        if($request->hasFile('upload')) {
+	            $upload = $request->file('upload');
+	            $ts = date('m-j-Y H-i-s', strtotime(now()));
+	            $filename =  $ts . '.jpg';
+	            $upload->move(public_path('/uploads/images/'), $filename);
+
+	            $img = Image::make(public_path('uploads/images/'. $filename));  
+	            // $img = Image::make($request->file('upload')->getRealPath());
+	            // $timestamp = date('F j, Y H:i:s', strtotime(now()));
+	            $img->text($ts, 50, 120, function($font) {  
+	                $font->file(public_path('fonts/RobotoMonoBold.ttf'));  
+	                $font->size(80);
+	                $font->color('#ffa500');
+	                $font->align('left');
+	            });  
+
+	           $img->save(public_path('uploads/images/' . $filename));  
+	           $report_img = new ReportImage();
+	           $report_img->report_id = $report->id;
+	           $report_img->image_name = $filename;
+	           $report_img->save();
+	        }
+
+	        return response('Report Submitted', 200)
+                      ->header('Content-Type', 'text/plain');
     	}
     }
 }

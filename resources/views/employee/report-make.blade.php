@@ -33,6 +33,7 @@
 					@csrf
 					<input type="hidden" name="id" value="">
 					<input type="hidden" name="cat" value="{{ $cat }}">
+					<input type="hidden" name="farm" value="{{ $farm->id }}">
 					<input type="hidden" name="location_id" value="{{ $location->id }}">
 					<input type="hidden" class="lat" name="lat" id="latitude">
 					<input type="hidden" class="lon" name="lon" id="longitude">
@@ -44,7 +45,8 @@
 								<span id="camera" class="btn btn-primary"><i class="fa fa-camera fa-3x"></i></span>
 							</label>
 						</div>
-						<p><small>Multiple Image Upload. One at a time capture.</small></p>
+						{{-- <p><small>Multiple Image Upload. One at a time capture.</small></p> --}}
+						<p><small>Tap to Capture Image.</small></p>
 					</div>
 
 					<div class="form-group {{ $errors->first('remarks') ? 'has-error' : ''  }}">

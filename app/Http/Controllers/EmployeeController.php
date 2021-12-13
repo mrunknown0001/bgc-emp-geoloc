@@ -147,17 +147,19 @@ class EmployeeController extends Controller
         // Location Category
         if($cat == 'loc') {
             $location = Location::findorfail($id);
+            $farm = $location->farm;
         }
         // Sub Location Category
         elseif($cat == 'sub') {
             $location = SubLocation::findorfail($id);
+            $farm = $location->farm;
         }
         else {
             return abort(404);
         }
 
         // Redirect to inteded URL for reporting with images
-        return view('employee.report-make', compact('location', 'cat'));
+        return view('employee.report-make', compact('location', 'cat', 'farm'));
     }
 
 }
