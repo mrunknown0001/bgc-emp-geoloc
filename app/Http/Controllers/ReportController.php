@@ -20,7 +20,9 @@ class ReportController extends Controller
     public function submit(Request $request)
     {
     	if($request->ajax()) {
-    		
+    		$request->validate([
+    			'upload' => 'required'
+    		]);
     	}
     }
 }
