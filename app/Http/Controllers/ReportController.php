@@ -22,7 +22,7 @@ class ReportController extends Controller
 	 */
 	public function reports(Request $request)
 	{
-        if($request->ajax()) {
+        // if($request->ajax()) {
         	$reports = Report::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
  
             $data = collect();
@@ -35,7 +35,7 @@ class ReportController extends Controller
                         'action' => 'action'
                     ]);
                 }
-            }
+            // }
             return DataTables::of($data)
                     ->rawColumns(['action'])
                     ->make(true);
