@@ -59,7 +59,7 @@ class ReportController extends Controller
     		$report->farm_id = '';
             $report->latitude = $request->lat;
             $report->longitude = $request->lon;
-            $report->cat = $request-cat;
+            $report->cat = $request->cat;
             if($cat == 'loc') {
             	$report->location_id = $request->location_id;
             }
