@@ -88,7 +88,7 @@
 	        }).then((result) => {
 	          if (result.value) {
 	            // view here
-	            window.location.replace("/a/user/update/" + id);
+	            window.location.replace("/a/report/detail" + id);
 
 	          }
 	          else {
