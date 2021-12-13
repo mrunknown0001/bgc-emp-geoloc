@@ -72,9 +72,10 @@
 			getLocation();
 		  $('#reportform').on('submit',(function(e) {
 		    e.preventDefault();
-		    if($("#upload").val() == null) {
-		    	alert('no upload')
-		    }
+				if ($('#upload').get(0).files.length === 0) {
+				    // console.log("No files selected.");
+				    alert('no image');
+				}
 				// Add Loading Animation here
 		  	$("body").addClass("loading"); 
 		    var formData = new FormData(this);
