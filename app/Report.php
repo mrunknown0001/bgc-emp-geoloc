@@ -10,4 +10,22 @@ class Report extends Model
     {
     	return $this->hasMany('App\ReportImage');
     }
+
+
+    public function farm()
+    {
+    	return $this->belongsTo('App\Farm');
+    }
+
+
+    public function loc()
+    {
+    	return $this->belongsTo('App\Location');
+    }
+
+
+    public function sub()
+    {
+    	return $this->belongsTo('App\SubLocaton');
+    }
 }
