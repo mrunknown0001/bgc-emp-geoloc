@@ -30,8 +30,8 @@
 			<div class="col-md-12">
 				@include('includes.all')
 			</div>
-			<div class="col-md-12">
-
+			<div class="col-md-8">
+				<p>Location: {{ $data->cat == 'loc' ? $data->loc->location_code : $data->sub->location->location_code . ' - ' . $data->sub->sub_location_code }}</p>
 			</div>
 		</div>
 		<div class="overlay"></div>
