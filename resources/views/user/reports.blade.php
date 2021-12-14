@@ -10,11 +10,11 @@
 @endsection
 
 @section('header')
-	@include('employee.includes.header')
+	@include('user.includes.header')
 @endsection
 
 @section('sidebar')
-	@include('employee.includes.sidebar')
+	@include('user.includes.sidebar')
 @endsection
 
 @section('content')
