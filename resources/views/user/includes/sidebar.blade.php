@@ -19,6 +19,11 @@
           <i class="fa fa-map-marker"></i> <span>Punches</span>
         </a>
       </li>
+      <li class="{{ route('man.reports') == url()->current() ? 'active' : ''}}">
+        <a href="{{ route('man.reports') }}">
+          <i class="fa fa-list"></i> <span>Reports</span>
+        </a>
+      </li>
     </ul>
   </section>
 </aside>
