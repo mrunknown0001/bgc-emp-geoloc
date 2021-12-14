@@ -164,7 +164,7 @@ class UserController extends Controller
 
     public function reports(Request $request)
     {
-        // if($request->ajax()) {
+        if($request->ajax()) {
             $reports = Report::orderBy('created_at', 'desc')->get();
  
             $data = collect();
@@ -181,7 +181,7 @@ class UserController extends Controller
             return DataTables::of($data)
                     ->rawColumns(['action'])
                     ->make(true);
-        // }
+        }
         return view('user.reports');
     }
 
