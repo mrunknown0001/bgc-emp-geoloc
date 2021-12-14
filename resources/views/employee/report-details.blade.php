@@ -46,6 +46,7 @@
 						@endforeach
 					</div>
 				@endif
+				<div id="mapholder" style="display: none;"></div>
 			</div>
 		</div>
 		<div class="overlay"></div>
@@ -59,6 +60,28 @@
 	<script src="https://maps.google.com/maps/api/js?key=AIzaSyAQvHBXoM12klgegEIh1rTfklVQR3XkAXw"></script>
 
 	<script>
+
+		var lat = {{ $report->latitude }};
+		var lon = {{ $report->longitude }};
+		// var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false&key=AIzaSyAQvHBXoM12klgegEIh1rTfklVQR3XkAXw";
+	  var latlon=new google.maps.LatLng(lat, lon)
+	  var mapholder=document.getElementById('mapholder')
+	  mapholder.style.height='250px';
+	  mapholder.style.width='100%';
+
+	  var myOptions={
+	  center:latlon,zoom:14,
+	  mapTypeId:google.maps.MapTypeId.ROADMAP,
+	  mapTypeControl:false,
+	  navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
+	  };
+	  var map=new google.maps.Map(document.getElementById("mapholder"),myOptions);
+	  var marker=new google.maps.Marker({position:latlon,map:map,title:"You are here!"});
+
+		$("#showmap").click(function () {
+			$("#mapholder").show();
+		});
+
 
     window.prettyPrint && prettyPrint();
 
