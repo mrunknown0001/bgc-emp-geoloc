@@ -163,6 +163,24 @@ class UserController extends Controller
 
     public function reports(Request $request)
     {
+        if($request->ajax()) {
+            $reports = Report::orderBy('created_at', 'desc')->get();
+ 
+            $data = collect();
+            if(count($reports) > 0) {
+                foreach($reports as $j) {
+                    $data->push([
+                        'farm' => $j->farm->code,
+                        'location' => $j->cat == 'loc' ? $j->loc->location_code : $j->sub->location->location_code . ' - ' . $j->sub->sub_location_code,
+                        'date_time' => date('F j, Y h:i:s A', strtotime($j->created_at)),
+                        'action' => '<button id="view" data-id="' . $j->id . '" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> View</button>'
+                    ]);
+                }
+            }
+            return DataTables::of($data)
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
         return view('user.reports');
     }
 
