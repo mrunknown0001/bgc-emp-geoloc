@@ -88,7 +88,7 @@
 	        }).then((result) => {
 	          if (result.value) {
 	            // view here
-	            window.location.replace("/m/report/detail/" + id);
+	            window.location.replace("/m/report/details/" + id);
 
 	          }
 	          else {
