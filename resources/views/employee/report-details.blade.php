@@ -5,7 +5,8 @@
 @endsection
 
 @section('style')
-
+	<link href="https://cdn.bootcss.com/balloon-css/0.5.0/balloon.min.css" rel="stylesheet">
+  <link href="{{ asset('magnify/css/jquery.magnify.css') }}" rel="stylesheet">
 @endsection
 
 @section('header')
@@ -35,6 +36,16 @@
 				<p>Location: <strong>{{ $data->farm->code }} - {{ $data->cat == 'loc' ? $data->loc->location_name : $data->sub->location->location_name . ' - ' . $data->sub->sub_location_name }}</strong></p>
 				<p>Date &amp; Time: <strong>{{ date('F j, Y h:i:s A', strtotime($data->created_at)) }}</strong></p>
 				<p>Remarks: <strong>{{ $data->remarks }}</strong></p>
+				@if(count($data->report_images) > 0)
+					<h4>Images Uploaded</h4>
+					<div class="image-set m-t-20">
+						@foreach($data->images as $i)
+							<a data-magnify="gallery" data-src="" data-caption="{{ $i->filename }}" data-group="a" href="{{ asset('/uploads/images/' . $i->filename) }}">
+			          <img src="{{ asset('/uploads/images/' . $i->filename) }}" alt="" height="50px">
+			        </a>
+						@endforeach
+					</div>
+				@endif
 			</div>
 		</div>
 		<div class="overlay"></div>
@@ -43,5 +54,38 @@
 @endsection
 
 @section('script')
+	<script src="https://cdn.bootcss.com/prettify/r298/prettify.min.js"></script>
+	<script src="{{ asset('magnify/js/jquery.magnify.js') }}"></script>
+	<script src="https://maps.google.com/maps/api/js?key=AIzaSyAQvHBXoM12klgegEIh1rTfklVQR3XkAXw"></script>
 
+	<script>
+
+    window.prettyPrint && prettyPrint();
+
+    var defaultOpts = {
+      draggable: true,
+      resizable: true,
+      movable: true,
+      keyboard: true,
+      title: true,
+      modalWidth: 320,
+      modalHeight: 320,
+      fixedContent: true,
+      fixedModalSize: false,
+      initMaximized: false,
+      gapThreshold: 0.02,
+      ratioThreshold: 0.1,
+      minRatio: 0.05,
+      maxRatio: 16,
+      headToolbar: ['maximize', 'close'],
+      footToolbar: ['zoomIn', 'zoomOut', 'prev', 'fullscreen', 'next', 'actualSize', 'rotateRight'],
+      multiInstances: true,
+      initEvent: 'click',
+      initAnimation: true,
+      fixedModalPos: false,
+      zIndex: 1090,
+      dragHandle: '.magnify-modal',
+      progressiveLoading: true
+    };
+	</script>
 @endsection
