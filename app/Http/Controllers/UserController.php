@@ -163,7 +163,7 @@ class UserController extends Controller
 
     public function reports(Request $request)
     {
-        
+        return view('user.reports');
     }
 
 }
