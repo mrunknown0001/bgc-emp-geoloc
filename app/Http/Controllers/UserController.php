@@ -185,4 +185,12 @@ class UserController extends Controller
         return view('user.reports');
     }
 
+
+    public function reportDetails($id)
+    {
+        $data = Report::findorfail($id);
+
+        return view('user.report-details', compact('data'));
+    }
+
 }
