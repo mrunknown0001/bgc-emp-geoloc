@@ -60,55 +60,56 @@
 	<script src="https://maps.google.com/maps/api/js?key=AIzaSyAQvHBXoM12klgegEIh1rTfklVQR3XkAXw"></script>
 
 	<script>
+		$(document).ready(function() {
+			var lat = {{ $data->latitude }};
+			var lon = {{ $data->longitude }};
+			// var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false&key=AIzaSyAQvHBXoM12klgegEIh1rTfklVQR3XkAXw";
+		  var latlon=new google.maps.LatLng(lat, lon)
+		  var mapholder=document.getElementById('mapholder')
+		  mapholder.style.height='250px';
+		  mapholder.style.width='100%';
 
-		var lat = {{ $data->latitude }};
-		var lon = {{ $data->longitude }};
-		// var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false&key=AIzaSyAQvHBXoM12klgegEIh1rTfklVQR3XkAXw";
-	  var latlon=new google.maps.LatLng(lat, lon)
-	  var mapholder=document.getElementById('mapholder')
-	  mapholder.style.height='250px';
-	  mapholder.style.width='100%';
+		  var myOptions={
+		  center:latlon,zoom:14,
+		  mapTypeId:google.maps.MapTypeId.ROADMAP,
+		  mapTypeControl:false,
+		  navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
+		  };
+		  var map=new google.maps.Map(document.getElementById("mapholder"),myOptions);
+		  var marker=new google.maps.Marker({position:latlon,map:map,title:"You are here!"});
 
-	  var myOptions={
-	  center:latlon,zoom:14,
-	  mapTypeId:google.maps.MapTypeId.ROADMAP,
-	  mapTypeControl:false,
-	  navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
-	  };
-	  var map=new google.maps.Map(document.getElementById("mapholder"),myOptions);
-	  var marker=new google.maps.Marker({position:latlon,map:map,title:"You are here!"});
+			$("#showmap").click(function () {
+				$("#mapholder").show();
+			});
 
-		$("#showmap").click(function () {
-			$("#mapholder").show();
+
+	    window.prettyPrint && prettyPrint();
+
+	    var defaultOpts = {
+	      draggable: true,
+	      resizable: true,
+	      movable: true,
+	      keyboard: true,
+	      title: true,
+	      modalWidth: 320,
+	      modalHeight: 320,
+	      fixedContent: true,
+	      fixedModalSize: false,
+	      initMaximized: false,
+	      gapThreshold: 0.02,
+	      ratioThreshold: 0.1,
+	      minRatio: 0.05,
+	      maxRatio: 16,
+	      headToolbar: ['maximize', 'close'],
+	      footToolbar: ['zoomIn', 'zoomOut', 'prev', 'fullscreen', 'next', 'actualSize', 'rotateRight'],
+	      multiInstances: true,
+	      initEvent: 'click',
+	      initAnimation: true,
+	      fixedModalPos: false,
+	      zIndex: 1090,
+	      dragHandle: '.magnify-modal',
+	      progressiveLoading: true
+	    };
 		});
-
-
-    window.prettyPrint && prettyPrint();
-
-    var defaultOpts = {
-      draggable: true,
-      resizable: true,
-      movable: true,
-      keyboard: true,
-      title: true,
-      modalWidth: 320,
-      modalHeight: 320,
-      fixedContent: true,
-      fixedModalSize: false,
-      initMaximized: false,
-      gapThreshold: 0.02,
-      ratioThreshold: 0.1,
-      minRatio: 0.05,
-      maxRatio: 16,
-      headToolbar: ['maximize', 'close'],
-      footToolbar: ['zoomIn', 'zoomOut', 'prev', 'fullscreen', 'next', 'actualSize', 'rotateRight'],
-      multiInstances: true,
-      initEvent: 'click',
-      initAnimation: true,
-      fixedModalPos: false,
-      zIndex: 1090,
-      dragHandle: '.magnify-modal',
-      progressiveLoading: true
-    };
 	</script>
 @endsection
