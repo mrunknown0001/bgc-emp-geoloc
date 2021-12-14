@@ -46,6 +46,7 @@
 						@endforeach
 					</div>
 				@endif
+				<p><button class="btn btn-primary btn-xs" id="showmap"><i class="fa fa-map-marked-alt"></i> View Location</button></p>
 				<div id="mapholder" style="display: none;"></div>
 			</div>
 		</div>
