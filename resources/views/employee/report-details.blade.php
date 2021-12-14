@@ -61,8 +61,8 @@
 
 	<script>
 
-		var lat = {{ $report->latitude }};
-		var lon = {{ $report->longitude }};
+		var lat = {{ $data->latitude }};
+		var lon = {{ $data->longitude }};
 		// var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false&key=AIzaSyAQvHBXoM12klgegEIh1rTfklVQR3XkAXw";
 	  var latlon=new google.maps.LatLng(lat, lon)
 	  var mapholder=document.getElementById('mapholder')
