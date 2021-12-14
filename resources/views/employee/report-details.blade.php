@@ -40,8 +40,8 @@
 					<h4>Images Uploaded</h4>
 					<div class="image-set m-t-20">
 						@foreach($data->report_images as $i)
-							<a data-magnify="gallery" data-src="" data-caption="{{ $i->filename }}" data-group="a" href="{{ asset('/uploads/images/' . $i->filename) }}">
-			          <img src="{{ asset('/uploads/images/' . $i->filename) }}" alt="" height="50px">
+							<a data-magnify="gallery" data-src="" data-caption="{{ $i->image_name }}" data-group="a" href="{{ asset('/uploads/images/' . $i->image_name) }}">
+			          <img src="{{ asset('/uploads/images/' . $i->image_name) }}" alt="" height="50px">
 			        </a>
 						@endforeach
 					</div>
