@@ -39,7 +39,7 @@
 				@if(count($data->report_images) > 0)
 					<h4>Images Uploaded</h4>
 					<div class="image-set m-t-20">
-						@foreach($data->images as $i)
+						@foreach($data->report_images as $i)
 							<a data-magnify="gallery" data-src="" data-caption="{{ $i->filename }}" data-group="a" href="{{ asset('/uploads/images/' . $i->filename) }}">
 			          <img src="{{ asset('/uploads/images/' . $i->filename) }}" alt="" height="50px">
 			        </a>
