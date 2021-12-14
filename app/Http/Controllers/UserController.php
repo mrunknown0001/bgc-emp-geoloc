@@ -160,4 +160,10 @@ class UserController extends Controller
         return view('user.location', ['lat' => $lat, 'lon' => $lon, 'log' => $log]);
     }
 
+
+    public function reports(Request $request)
+    {
+        
+    }
+
 }

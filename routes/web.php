@@ -77,6 +77,8 @@ Route::group(['prefix' => 'm', 'middleware' => 'manager'], function () {
 	Route::get('/map/location/{id}', 'UserController@mapLocation')->name('user.map.location');
 	# Export Logs
 	Route::get('/export/logs', 'UserController@exportLogs')->name('user.export.logs');
+	# All Report Lists
+	Route::get('/reports', 'UserController@reports')->name('man.reports');
 });
 
 

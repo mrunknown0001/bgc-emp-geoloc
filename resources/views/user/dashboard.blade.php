@@ -58,6 +58,19 @@
 				</div>
 			</div>
 
+			<div class="col-md-4">
+				<div class="small-box bg-red">
+					<div class="inner">
+						<h3>Reports</h3>
+						<p>Reports</p>
+					</div>
+					<div class="icon">
+						<i class="fa fa-list"></i>
+					</div>
+					<a href="{{ route('man.reports') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+				</div>
+			</div>
+
 		</div>
 	</section>
 </div>
