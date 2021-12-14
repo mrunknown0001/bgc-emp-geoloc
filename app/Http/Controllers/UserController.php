@@ -13,6 +13,7 @@ use Hash;
 use App\Http\Controllers\GeneralController as GC;
 use Excel;
 use App\Exports\EmployeeLogExport;
+use App\Report;
 
 class UserController extends Controller
 {
